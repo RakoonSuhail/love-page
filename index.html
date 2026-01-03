@@ -1,174 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Love Page 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Page 🌸</title>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: 'Arial', sans-serif;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
 
-    body{
-      height:100vh;
-      background:#ffe6eb;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
+/* BACKGROUND */
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#ffe6f0,#fff6fb);
+  overflow:hidden;
+}
 
-    /* HEART BACKGROUND */
-    .heart{
-      position:absolute;
-      bottom:-20px;
-      color:#ff4d6d;
-      font-size:20px;
-      animation: floatUp 6s linear infinite;
-      opacity:0.8;
-    }
+/* 🌸 FLOWERS */
+.flower{
+  position:absolute;
+  top:-20px;
+  font-size:18px;
+  animation: fallDown linear infinite;
+  opacity:0.8;
+}
 
-    @keyframes floatUp{
-      0%{
-        transform:translateY(0) scale(0.8);
-        opacity:0;
-      }
-      10%{opacity:0.8;}
-      100%{
-        transform:translateY(-110vh) scale(1.2);
-        opacity:0;
-      }
-    }
+@keyframes fallDown{
+  0%{
+    transform:translateY(0) rotate(0deg);
+    opacity:0;
+  }
+  10%{opacity:1;}
+  100%{
+    transform:translateY(120vh) rotate(360deg);
+    opacity:0;
+  }
+}
 
-    /* CARD */
-    .card{
-      background:white;
-      padding:32px;
-      border-radius:25px;
-      width:90%;
-      max-width:360px;
-      text-align:center;
-      box-shadow:0 25px 60px rgba(0,0,0,0.18);
-      animation: cardIn 0.7s cubic-bezier(.17,.67,.42,1) forwards;
-      z-index:10;
-    }
+/* CARD */
+.card{
+  background:white;
+  width:92%;
+  max-width:420px;
+  padding:32px;
+  border-radius:30px;
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.25);
+  z-index:10;
+}
 
-    @keyframes cardIn{
-      from{
-        opacity:0;
-        transform:scale(0.9) translateY(20px);
-      }
-      to{
-        opacity:1;
-        transform:scale(1.2) translateY(0);
-      }
-    }
+/* GIF */
+img{
+  width:260px;
+  max-width:100%;
+  margin-bottom:18px;
+}
 
-    /* GIF */
-    img{
-      width:220px;
-      max-width:100%;
-      margin-bottom:18px;
-    }
+/* TEXT */
+h2{
+  color:#ff5f8a;
+  font-size:22px;
+  margin-bottom:22px;
+}
 
-    /* TEXT */
-    .text{
-      font-size:18px;
-      color:#ff4d6d;
-      margin-bottom:20px;
-    }
+/* BUTTONS */
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+}
 
-    /* BUTTONS */
-    .btn{
-      border:none;
-      padding:12px 26px;
-      border-radius:30px;
-      font-size:16px;
-      cursor:pointer;
-    }
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.2s;
+}
 
-    .yes{
-      background:#ff4d6d;
-      color:white;
-      margin-top:10px;
-    }
+#yes{
+  background:#ff5f8a;
+  color:white;
+}
 
-    .no{
-      background:#f1f1f1;
-      color:#333;
-      position:absolute;
-    }
-  </style>
+#no{
+  background:#f1f1f1;
+}
+
+button:hover{
+  transform:scale(1.08);
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEARTS -->
-  <script>
-    setInterval(()=>{
-      const heart=document.createElement("div");
-      heart.className="heart";
-      heart.innerHTML="❤";
-      heart.style.left=Math.random()*100+"vw";
-      heart.style.animationDuration=(4+Math.random()*3)+"s";
-      document.body.appendChild(heart);
-      setTimeout(()=>heart.remove(),7000);
-    },400);
-  </script>
+<!-- CARD -->
+<div class="card">
+  <img id="gif" src="gifs/start.gif">
+  <h2 id="text">Do you love me? 🥺🌸</h2>
 
-  <!-- CARD -->
-  <div class="card">
-    <img id="gif" src="gifs/start.gif">
-    <div class="text" id="text">
-      Suno… mujhe tumse kuch puchna hai 🥺💖
-    </div>
-    <button class="btn yes" onclick="yes()">Yes</button>
-    <button class="btn no" id="no" onclick="no()">No</button>
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
   </div>
+</div>
 
-  <!-- LOGIC -->
-  <script>
-    let step=0;
+<!-- FLOWER SCRIPT -->
+<script>
+const flowers = ["🌸","🌼","🌷","🌹"];
 
-    function no(){
-      const btn=document.getElementById("no");
-      btn.style.left=Math.random()*70+"%";
-      btn.style.top=Math.random()*70+"%";
-    }
+function createFlower(){
+  const flower = document.createElement("div");
+  flower.className = "flower";
+  flower.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
+  flower.style.left = Math.random()*100 + "vw";
+  flower.style.fontSize = (14 + Math.random()*14) + "px";
+  flower.style.animationDuration = (5 + Math.random()*5) + "s";
+  document.body.appendChild(flower);
 
-    function yes(){
-      const gif=document.getElementById("gif");
-      const text=document.getElementById("text");
+  setTimeout(()=>flower.remove(),10000);
+}
 
-      step++;
+/* zyada flowers ke liye fast interval */
+setInterval(createFlower, 250);
+</script>
 
-      if(step===1){
-        gif.src="gifs/no1.gif";
-        text.innerHTML="Aise mana mat karo na 🥺";
-      }
-      else if(step===2){
-        gif.src="gifs/no2.gif";
-        text.innerHTML="Pleaseee 😭💖";
-      }
-      else if(step===3){
-        gif.src="gifs/no3.gif";
-        text.innerHTML="Thoda sa pyaar dikha do 🥹";
-      }
-      else if(step===4){
-        gif.src="gifs/no4.gif";
-        text.innerHTML="Last baar puch raha hoon 😖";
-      }
-      else{
-        gif.src="gifs/yes.gif";
-        text.innerHTML="Yayyy ❤️ I Love You 😍";
-        document.getElementById("no").style.display="none";
-      }
-    }
-  </script>
+<!-- LOGIC -->
+<script>
+const gif = document.getElementById("gif");
+const text = document.getElementById("text");
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+let noCount = 0;
+
+noBtn.addEventListener("click",()=>{
+  noCount++;
+
+  if(noCount===1){
+    gif.src="gifs/no1.gif";
+    text.innerHTML="Aise mana mat karo na 😢🌸";
+  }else if(noCount===2){
+    gif.src="gifs/no2.gif";
+    text.innerHTML="Please thoda sa pyaar 🥺";
+  }else if(noCount===3){
+    gif.src="gifs/no3.gif";
+    text.innerHTML="Dil toot raha hai 💔";
+  }else{
+    gif.src="gifs/no4.gif";
+    text.innerHTML="Ab to YES bol do 😭💗";
+  }
+});
+
+yesBtn.addEventListener("click",()=>{
+  gif.src="gifs/yes.gif";
+  text.innerHTML="Yayyy 💖 Oggy is all yours 🌹";
+  yesBtn.style.display="none";
+  noBtn.style.display="none";
+});
+</script>
 
 </body>
 </html>
